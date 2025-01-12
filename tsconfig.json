@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es2020" /* Set the JavaScript language version for emitted JavaScript. */,
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "rootDir": "./src" /* Specify the root folder of your source files. */,
+    "outDir": "./dist" /* Specify the output folder for all emitted files. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "esModuleInterop": true /* Emit additional code for CommonJS and ES module interop. */,
+    "skipLibCheck": true /* Skip type checking of declaration files. */,
+
+    /* Debugging Options */
+    "sourceMap": true /* Generate corresponding .map files. */,
+    "inlineSources": true /* Include .ts sources in the .map files. */,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node" /* Use Node.js module resolution. */,
+    "baseUrl": "./" /* Base directory for resolving non-relative module imports. */,
+    "paths": {
+      /* Map import paths to directories/files. */ "@/*": ["src/*"]
+    },
+    "resolveJsonModule": true /* Allow importing .json files. */,
+
+    /* Type Checking Options */
+    "noImplicitAny": true /* Raise errors for expressions and declarations with 'any' type. */,
+    "strictNullChecks": true /* Ensure null/undefined are handled explicitly. */,
+    "strictPropertyInitialization": true /* Ensure all class properties are initialized. */,
+    "forceConsistentCasingInFileNames": true /* Ensure consistent file imports with case-sensitive file names. */,
+
+    /* Additional Options */
+    "declaration": true /* Generate .d.ts files for the project. */,
+    "declarationDir": "./dist/types" /* Specify directory for generated .d.ts files. */,
+    "emitDecoratorMetadata": true /* Emit design-type metadata for decorators. */,
+    "experimentalDecorators": true /* Enable experimental support for decorators. */,
+
+    /* Additional Interop Options */
+    "allowSyntheticDefaultImports": true /* Allow default imports from modules with no default export. */
+  },
+  "include": ["src/**/*"] /* Include all files in the 'src' directory. */,
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ] /* Exclude unnecessary files and directories. */
+}
