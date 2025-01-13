@@ -1,9 +1,12 @@
 {
   "name": "room-manager",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/bot.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/bot.js",
+    "dev": "tsc --watch"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +18,12 @@
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
+    "@eslint/js": "^9.18.0",
     "@types/node": "^22.10.5",
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
   }
 }

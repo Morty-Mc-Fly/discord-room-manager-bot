@@ -4,6 +4,7 @@ import {
   PermissionsBitField,
   ChannelType,
   VoiceChannel,
+  TextChannel,
 } from "discord.js";
 
 export class RoomManager {
@@ -11,7 +12,7 @@ export class RoomManager {
 
   private async getRoomChannel(
     guild: Guild,
-    userId: string
+    userId: string,
   ): Promise<VoiceChannel | null> {
     const channelId = this.userVoiceChannels.get(userId);
     if (!channelId) return null;
@@ -26,17 +27,25 @@ export class RoomManager {
   async createRoom(
     guild: Guild,
     userId: string,
-    username: string
+    username: string,
+    textChannel: TextChannel,
   ): Promise<GuildChannel | string> {
     const existingChannel = await this.getRoomChannel(guild, userId);
     if (existingChannel) {
       return `You already have a room: ${existingChannel.name}`;
     }
 
-    // Define permissions for the channel creator
+    // Find the category of the text channel
+    const category = textChannel.parent;
+    if (!category || category.type !== ChannelType.GuildCategory) {
+      return "The command must be used in a text channel that is inside a category.";
+    }
+
+    // Create the voice channel under the same category
     const newChannel = await guild.channels.create({
       name: `${username}'s Room`,
       type: ChannelType.GuildVoice,
+      parent: category.id, // Assign to the same category
       permissionOverwrites: [
         {
           id: guild.id, // Default permissions for everyone
@@ -73,7 +82,7 @@ export class RoomManager {
   async addUserToRoom(
     guild: Guild,
     userId: string,
-    mentionedUserId: string
+    mentionedUserId: string,
   ): Promise<string> {
     const channel = await this.getRoomChannel(guild, userId);
     if (!channel) {
@@ -91,7 +100,7 @@ export class RoomManager {
   async removeUserFromRoom(
     guild: Guild,
     userId: string,
-    mentionedUserId: string
+    mentionedUserId: string,
   ): Promise<string> {
     const channel = await this.getRoomChannel(guild, userId);
     if (!channel) {

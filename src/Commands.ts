@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 import { RoomManager } from "./RoomManager";
 
 export class Commands {
@@ -9,24 +9,22 @@ export class Commands {
   }
 
   async handleCommand(message: Message): Promise<void> {
-    const { content, author, guild } = message;
+    const { content, author, guild, channel } = message;
 
     if (content.startsWith("!room")) {
-      if (!guild) {
-        message.reply("This command can only be used in a server.");
+      if (!guild || !(channel instanceof TextChannel)) {
+        message.reply("This command can only be used in a server text channel.");
         return;
       }
 
       const response = await this.roomManager.createRoom(
         guild,
         author.id,
-        author.username
+        author.username,
+        channel // Pass the text channel where the command was issued
       );
-      if (typeof response === "string") {
-        message.reply(response);
-      } else {
-        message.reply(`Your room has been created: ${response.name}`);
-      }
+
+      message.reply(typeof response === "string" ? response : `Room created: ${response.name}`);
     }
 
     if (content.startsWith("!deletechannel")) {
