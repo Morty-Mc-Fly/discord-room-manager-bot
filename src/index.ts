@@ -1,32 +1,27 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
-import { RoomManager } from "./RoomManager";
-import { Commands } from "./Commands";
+import { handleCommand } from "./handlers/commandHandler";
 
 dotenv.config();
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildVoiceStates,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates,
     GatewayIntentBits.MessageContent,
   ],
 });
 
-const roomManager = new RoomManager();
-const commands = new Commands(roomManager);
-
 client.once("ready", () => {
-  console.log(`Bot logged in as ${client.user?.tag}`);
+  console.log(`Logged in as ${client.user?.tag}`);
 });
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || !message.guild) return;
 
-  // Handle commands
-  await commands.handleCommand(message);
+  // Pass the command to the command handler
+  await handleCommand(message);
 });
 
-const token = process.env.DISCORD_BOT_TOKEN;
-client.login(token);
+client.login(process.env.DISCORD_BOT_TOKEN);

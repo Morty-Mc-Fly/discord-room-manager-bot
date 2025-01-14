@@ -1,29 +1,29 @@
 {
   "name": "room-manager",
   "version": "1.0.0",
-  "main": "src/bot.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start": "node dist/bot.js",
-    "dev": "tsc --watch"
+  "description": "discord bot to manage private rooms",
+  "homepage": "https://github.com/Morty-Mc-Fly/discord-room-manager-bot#readme",
+  "bugs": {
+    "url": "https://github.com/Morty-Mc-Fly/discord-room-manager-bot/issues"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morty-Mc-Fly/discord-room-manager-bot.git"
+  },
   "license": "ISC",
+  "author": "",
   "type": "commonjs",
-  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "prestart": "npm install ts-node --no-save && npm install dotenv --no-save && npm install discord.js --no-save",
+    "start": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
-    "@eslint/js": "^9.18.0",
-    "@types/node": "^22.10.5",
-    "eslint": "^9.18.0",
-    "globals": "^15.14.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.20.0"
+    "ts-node": "^10.9.2"
   }
 }
