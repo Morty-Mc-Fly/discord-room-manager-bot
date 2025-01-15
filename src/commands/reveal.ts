@@ -1,7 +1,7 @@
 import { CommandInteraction, VoiceChannel } from "discord.js";
 import { userRooms } from "../interfaces/roomData";
 
-export async function hide(interaction: CommandInteraction) {
+export async function set(interaction: CommandInteraction) {
   const { guild, user } = interaction;
 
   if (!guild) {
@@ -25,30 +25,23 @@ export async function hide(interaction: CommandInteraction) {
   if (!channel) {
     userRooms.delete(user.id);
     await interaction.reply({
-      content: "Your room was deleted. Use `/room` to create a new one.",
+      content: "Your room was deleted. Use `/room <name>` to create a new one.",
       ephemeral: true,
     });
     return;
   }
 
-  // Hide the channel for @everyone
+  // Update the permissions for the @everyone role
   await channel.permissionOverwrites.create(guild.id, {
-    ViewChannel: false,
-    Connect: false,
+    ViewChannel: true,
+    Connect: true, // Optional: Allow users to join the voice channel
   });
 
-  // Hide the channel for each user added to the room
-  for (const userId of roomData.users) {
-    await channel.permissionOverwrites.create(userId, {
-      ViewChannel: false,
-    });
-  }
-
-  roomData.visible = false;
+  roomData.visible = true;
   userRooms.set(user.id, roomData);
 
   await interaction.reply({
-    content: "Your room is now hidden from everyone.",
+    content: "Your room is now visible to everyone in the server.",
     ephemeral: true,
   });
 }

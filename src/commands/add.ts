@@ -1,41 +1,57 @@
-import { Message, VoiceChannel } from "discord.js";
+import { CommandInteraction, Guild, VoiceChannel, User } from "discord.js";
 import { userRooms } from "../interfaces/roomData";
 
-export async function addUsers(message: Message) {
-  const { guild, author } = message;
+export async function add(interaction: CommandInteraction) {
+  const { guild, user, options } = interaction;
 
   if (!guild) {
-    message.reply("This command must be used in a server.");
+    await interaction.reply({
+      content: "This command must be used in a server.",
+      ephemeral: true,
+    });
     return;
   }
 
-  const roomData = userRooms.get(author.id);
+  const roomData = userRooms.get(user.id);
   if (!roomData) {
-    message.reply("You don't have a room. Use `!room` to create one first.");
+    await interaction.reply({
+      content: "You don't have a room. Use `/room` to create one first.",
+      ephemeral: true,
+    });
     return;
   }
 
   const channel = guild.channels.cache.get(roomData.channelId) as VoiceChannel;
   if (!channel) {
-    userRooms.delete(author.id);
-    message.reply("Your room was deleted. Use `!room` to create a new one.");
-    return;
-  }
-
-  const mentionedUsers = message.mentions.users.map((user) => user.id);
-  if (mentionedUsers.length === 0) {
-    message.reply("Please mention users to add.");
-    return;
-  }
-
-  for (const userId of mentionedUsers) {
-    await channel.permissionOverwrites.create(userId, {
-      ViewChannel: true,
-      Connect: true,
+    userRooms.delete(user.id);
+    await interaction.reply({
+      content: "Your room was deleted. Use `/room` to create a new one.",
+      ephemeral: true,
     });
-    roomData.users.push(userId);
+    return;
   }
 
-  userRooms.set(author.id, roomData);
-  message.reply(`Added ${mentionedUsers.length} user(s) to your room.`);
+  const mentionedUser = options.get("user")?.user as User;
+  if (!mentionedUser) {
+    await interaction.reply({
+      content: "Please specify a user to add.",
+      ephemeral: true,
+    });
+    return;
+  }
+
+  // Add user permissions to the channel
+  await channel.permissionOverwrites.create(mentionedUser.id, {
+    ViewChannel: true,
+    Connect: true,
+  });
+
+  // Update room data
+  roomData.users.push(mentionedUser.id);
+  userRooms.set(user.id, roomData);
+
+  await interaction.reply({
+    content: `Added ${mentionedUser.username} to your room.`,
+    ephemeral: true,
+  });
 }
