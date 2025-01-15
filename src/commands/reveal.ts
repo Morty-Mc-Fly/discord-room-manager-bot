@@ -1,7 +1,7 @@
 import { CommandInteraction, VoiceChannel } from "discord.js";
 import { userRooms } from "../interfaces/roomData";
 
-export async function set(interaction: CommandInteraction) {
+export async function reveal(interaction: CommandInteraction) {
   const { guild, user } = interaction;
 
   if (!guild) {
