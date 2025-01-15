@@ -27,7 +27,6 @@ build/
 *.njsproj
 *.sln
 
-#env
-.env
 
-.pem
+
+*.pem
