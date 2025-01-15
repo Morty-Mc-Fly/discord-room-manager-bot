@@ -1,7 +1,7 @@
 import { CommandInteraction, VoiceChannel } from "discord.js";
 import { userRooms } from "../interfaces/roomData";
 
-export async function reveal(interaction: CommandInteraction) {
+export async function open(interaction: CommandInteraction) {
   const { guild, user } = interaction;
 
   if (!guild) {
@@ -34,7 +34,7 @@ export async function reveal(interaction: CommandInteraction) {
   // Update the permissions for the @everyone role
   await channel.permissionOverwrites.create(guild.id, {
     ViewChannel: true,
-    Connect: true, // Optional: Allow users to join the voice channel
+    Connect: true,
   });
 
   roomData.visible = true;

@@ -54,11 +54,11 @@ export async function registerCommands(guildId: string) {
       description: "Display information about your personal room",
     },
     {
-      name: "reveal",
+      name: "open",
       description: "Make your room visible to everyone",
     },
     {
-      name: "hide",
+      name: "restrict",
       description: "Make your room hidden again",
     },
     {

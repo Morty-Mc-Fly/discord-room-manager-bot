@@ -3,13 +3,13 @@ import { CommandInteraction } from "discord.js";
 export async function help(interaction: CommandInteraction) {
   const helpText = `
 **Available Commands:**
-- \`/room [name]\`: Create a personal voice room. If no name is provided, your username will be used.
+- \`/create [name]\`: Create a personal voice room. If no name is provided, your username will be used.
 - \`/evict\`: Delete your personal room.
-- \`/add  @user\`: Add one or more users to your room.
-- \`/kick @user\`: Remove one or more users from your room.
-- \`/info\`: Display information about your room (users and visibility).
-- \`/reveal\`: Make your room visible to added users.
-- \`/hide\`: Make your room hidden again.
+- \`/add  @user\`: Add a user to your room.
+- \`/kick @user\`: Remove a user from your room.
+- \`/info\`: Display information about your room.
+- \`/open\`: Make your room public.
+- \`/restrict\`: Make your room private.
 - \`/help\`: Show this list of commands.
   `;
 
