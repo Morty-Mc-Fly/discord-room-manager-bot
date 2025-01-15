@@ -7,7 +7,7 @@ export async function hide(interaction: CommandInteraction) {
   if (!guild) {
     await interaction.reply({
       content: "This command must be used in a server.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -16,7 +16,7 @@ export async function hide(interaction: CommandInteraction) {
   if (!roomData) {
     await interaction.reply({
       content: "You don't have a room.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -26,7 +26,7 @@ export async function hide(interaction: CommandInteraction) {
     userRooms.delete(user.id);
     await interaction.reply({
       content: "Your room was deleted. Use `/room` to create a new one.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -49,6 +49,6 @@ export async function hide(interaction: CommandInteraction) {
 
   await interaction.reply({
     content: "Your room is now hidden from everyone.",
-    ephemeral: true,
+    flags: 64,
   });
 }

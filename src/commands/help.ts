@@ -15,6 +15,6 @@ export async function help(interaction: CommandInteraction) {
 
   await interaction.reply({
     content: helpText,
-    ephemeral: true,
+    flags: 64,
   });
 }

@@ -7,7 +7,7 @@ export async function kick(interaction: CommandInteraction) {
   if (!guild) {
     await interaction.reply({
       content: "This command must be used in a server.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -16,7 +16,7 @@ export async function kick(interaction: CommandInteraction) {
   if (!roomData) {
     await interaction.reply({
       content: "You don't have a room. Use `/room` to create one first.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -26,7 +26,7 @@ export async function kick(interaction: CommandInteraction) {
     userRooms.delete(user.id);
     await interaction.reply({
       content: "Your room was deleted. Use `/room` to create a new one.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -35,7 +35,7 @@ export async function kick(interaction: CommandInteraction) {
   if (!mentionedUser) {
     await interaction.reply({
       content: "Please specify a user to kick.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -48,6 +48,6 @@ export async function kick(interaction: CommandInteraction) {
 
   await interaction.reply({
     content: `Removed ${mentionedUser.username} from your room.`,
-    ephemeral: true,
+    flags: 64,
   });
 }

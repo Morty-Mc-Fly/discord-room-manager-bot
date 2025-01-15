@@ -13,7 +13,7 @@ export async function create(interaction: CommandInteraction) {
     if (!guild) {
       await interaction.reply({
         content: "This command must be used in a server.",
-        ephemeral: true,
+        flags: 64,
       });
       return;
     }
@@ -27,7 +27,7 @@ export async function create(interaction: CommandInteraction) {
       await interaction.reply({
         content:
           "This command must be used in a text channel inside a category.",
-        ephemeral: true,
+        flags: 64,
       });
       return;
     }
@@ -35,7 +35,7 @@ export async function create(interaction: CommandInteraction) {
     if (userRooms.has(user.id)) {
       await interaction.reply({
         content: "You already have a room. Use `/delroom` to delete it first.",
-        ephemeral: true,
+        flags: 64,
       });
       return;
     }
@@ -64,13 +64,13 @@ export async function create(interaction: CommandInteraction) {
 
     await interaction.reply({
       content: `Room "${roomName}" created successfully.`,
-      ephemeral: true,
+      flags: 64,
     });
   } catch (error) {
     console.error("Error in /room command:", error);
     await interaction.reply({
       content: "An unexpected error occurred while executing the command.",
-      ephemeral: true,
+      flags: 64,
     });
   }
 }
