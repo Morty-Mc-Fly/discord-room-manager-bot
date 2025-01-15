@@ -7,7 +7,7 @@ export async function evict(interaction: CommandInteraction) {
   if (!guild) {
     await interaction.reply({
       content: "This command must be used in a server.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -16,7 +16,7 @@ export async function evict(interaction: CommandInteraction) {
   if (!roomData) {
     await interaction.reply({
       content: "You don't have a room to delete.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -27,7 +27,7 @@ export async function evict(interaction: CommandInteraction) {
       console.error("Failed to delete the channel:", error);
       interaction.reply({
         content: "There was an error deleting your room. Please try again.",
-        ephemeral: true,
+        flags: 64,
       });
       return;
     });
@@ -37,6 +37,6 @@ export async function evict(interaction: CommandInteraction) {
 
   await interaction.reply({
     content: "Your room has been deleted.",
-    ephemeral: true,
+    flags: 64,
   });
 }

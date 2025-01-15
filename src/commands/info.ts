@@ -7,7 +7,7 @@ export async function info(interaction: CommandInteraction) {
   if (!guild) {
     await interaction.reply({
       content: "This command must be used in a server.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -16,7 +16,7 @@ export async function info(interaction: CommandInteraction) {
   if (!roomData) {
     await interaction.reply({
       content: "You don't have a room.",
-      ephemeral: true,
+      flags: 64,
     });
     return;
   }
@@ -29,6 +29,6 @@ export async function info(interaction: CommandInteraction) {
     content: `**Room Info:**
     - **Users**: ${userList}
     - **Visibility**: ${visibleStatus}`,
-    ephemeral: true,
+    flags: 64,
   });
 }

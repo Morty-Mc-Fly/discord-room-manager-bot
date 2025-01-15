@@ -13,14 +13,14 @@ export async function handleCommand(interaction: CommandInteraction) {
     } else {
       await interaction.reply({
         content: "Command not implemented.",
-        ephemeral: true,
+        flags: 64,
       });
     }
   } catch (error) {
     console.error(`Error handling command ${commandName}:`, error);
     await interaction.reply({
       content: "An error occurred while executing the command.",
-      ephemeral: true,
+      flags: 64,
     });
   }
 }
